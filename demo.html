@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+         <title>数据效验插件开发</title>
+        <meta charset="utf-8">
+        <style type="text/css">
+         *{margin:0; padding:0; font-family: "微软雅黑";}
+         .box{width:800px; border:1px solid #ddd; margin:50px auto 0; padding:30px;}
+        </style>
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+  <body>
+     <div class="box">
+	     <form class="data">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">邮箱</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入合法邮箱"
+              data-dr-regexp="^\w+@\w+\.\w+$" 
+              data-dr-regexp-message="请输入合法邮箱"
+              data-dr-required=ture
+              data-dr-required-message="邮箱输入不能为空"
+		    >
+		  </div>
+
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">手机号码</label>
+		    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入合法手机号码"
+               data-dr-regexp="^1\d{10}$"
+               data-dr-regexp-message="请输入手机号码"
+               data-dr-required=ture
+               data-dr-required-message="手机号码输入不能为空"
+		    >
+		  </div>
+
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">密码</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入有效密码"
+              data-dr-regexp="^\w+$"
+              data-dr-regexp-message="密码不合法(由字母数字下划线组成)"
+              data-dr-required=ture
+              data-dr-required-message="密码不能为空"
+              data-dr-min-length=6
+              data-dr-min-length-message="密码不能少于6个字符"
+              data-dr-max-length=16
+              data-dr-max-length-message="密码不能大于16个字符"
+
+		    >
+		  </div>
+
+       <div class="form-group">
+        <label for="exampleInputPassword1">确认密码</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入有效密码"
+         data-dr-confirm=true
+         data-dr-confirm-message="两次密码输入不一致"
+         data-dr-required=ture
+         data-dr-required-message="不能为空"
+
+        >
+
+      </div>
+
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">座机号码</label>
+		    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入有效座机号码"
+                data-dr-regexp="^0\d{2,3}-\d{7,8}$"
+                data-dr-regexp-message="座机号码输入不合法区号-座机号"
+                data-dr-required=true
+                data-dr-required-message="座机号码不能为空"
+		    >
+		  </div>
+		  <button type="submit" class="btn btn-default">注册</button>
+	   </form>
+    </div>
+    <script type="text/javascript" src="js/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="js/dataResult.js"></script>
+    <script type="text/javascript">
+           //如何使用
+          $("form").dataResult();
+            
+
+            //如何扩展
+          jQuery.prototype.dataResult.extendResult({
+          	     "max-length":function(data){   //值
+                       return this.val().length<=data;  //false
+          	     }
+          });
+
+
+    </script>
+  </body>
+</html>
